@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">CityRecommendation</string>
+
+
+
+    <string name="name">Όνομα</string>
+    <string name="age">Ηληκία</string>
+    <string name="coords">Συνεταγμένες</string>
+    <string name="next">Επόμενο</string>
+    <string name="city">Πόλη</string>
+
+    <string name="sea">Θάλασσα</string>
+    <string name="museum">Μουσεία</string>
+    <string name="cafe">Καφετέριες</string>
+
+    <string name="selectCriteria">Επιλογή κριτηρίων</string>
+
+    <string name="business">Business</string>
+    <string name="tourist">Tourist</string>
+</resources>
