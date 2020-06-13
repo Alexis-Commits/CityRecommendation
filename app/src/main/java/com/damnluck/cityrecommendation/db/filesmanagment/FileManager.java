@@ -3,7 +3,6 @@ package com.damnluck.cityrecommendation.db.filesmanagment;
 import android.content.Context;
 
 import com.damnluck.cityrecommendation.logic.Utils;
-import com.damnluck.cityrecommendation.models.Tourist;
 import com.damnluck.cityrecommendation.models.Traveller;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -21,18 +20,20 @@ public class FileManager {
 
 	private static String TRAVELLERS ="travellers.json";
 
-	static final Type type = new TypeToken<ArrayList<Traveller>>() {}.getType();
+	private static final Type type = new TypeToken<ArrayList<Traveller>>() {}.getType();
 
 
 
 	static public void writeToFile(Traveller traveller, Context context) {
 		try {
-
 			ArrayList<Traveller> travellers = readFromFile(context);
 			travellers.add(traveller);
+
 			Gson gson =  new Gson();
+
 			OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(TRAVELLERS, Context.MODE_PRIVATE));
 			outputStreamWriter.write(gson.toJson(travellers , type));
+
 			outputStreamWriter.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -49,7 +50,9 @@ public class FileManager {
 
 			if ( inputStream != null ) {
 				InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+
 				BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
 				String receiveString = "";
 				StringBuilder stringBuilder = new StringBuilder();
 
@@ -57,9 +60,9 @@ public class FileManager {
 					stringBuilder.append("\n").append(receiveString);
 				}
 
-				Gson gson = new Gson();
 				inputStream.close();
 
+				Gson gson = new Gson();
 				travellers = (ArrayList<Traveller>) gson.fromJson(stringBuilder.toString() ,type);
 			}
 		}

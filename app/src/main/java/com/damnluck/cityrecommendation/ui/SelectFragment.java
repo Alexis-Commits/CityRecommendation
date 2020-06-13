@@ -182,6 +182,7 @@ public class SelectFragment extends Fragment {
 
 	private void countDistance(Coords coords , String city ){
 
+		System.out.println(coords.toString());
 		resultDistance.add(new Pair<>(city , traveller.similarity(coords)));
 
 		if(resultDistance.size() > 1){
@@ -360,7 +361,7 @@ public class SelectFragment extends Fragment {
 		String lonString = body.substring(startIndex, endIndex);
 		String lon = lonString.replace("\"lon\":", "");
 
-
+		System.out.println("coords : "+lat +"\t"+lon);
 		return new Coords(Double.parseDouble(lat), Double.parseDouble(lon));
 	}
 

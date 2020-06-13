@@ -19,6 +19,9 @@ import com.damnluck.cityrecommendation.models.Business;
 import com.damnluck.cityrecommendation.models.Coords;
 import com.damnluck.cityrecommendation.models.Tourist;
 import com.damnluck.cityrecommendation.models.Traveller;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.internal.GoogleServices;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -66,18 +69,28 @@ public class LoginFragment extends Fragment {
 
 	@SuppressLint("MissingPermission")
 	private void getLocation() {
-		LocationServices.getFusedLocationProviderClient(Objects.requireNonNull(this.getActivity())).getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-			@Override
-			public void onSuccess(Location location) {
-				coords = new Coords(location.getLatitude(), location.getLongitude());
-			}
-		}).addOnFailureListener(new OnFailureListener() {
-			@Override
-			public void onFailure(@NonNull Exception e) {
-				permissions.requestNecessaryPermissions();
-			}
-		});
 
+		if(isGoogleServicesAvailable()){
+			LocationServices.getFusedLocationProviderClient(Objects.requireNonNull(this.getActivity())).getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+				@Override
+				public void onSuccess(Location location) {
+					coords = new Coords(location.getLatitude(), location.getLongitude());
+				}
+			}).addOnFailureListener(new OnFailureListener() {
+				@Override
+				public void onFailure(@NonNull Exception e) {
+					permissions.requestNecessaryPermissions();
+				}
+			});
+		}else {
+			//Emulator
+			coords = new Coords(37.983096,23.7275388); //Athens coordinates
+		}
+
+	}
+
+	private boolean isGoogleServicesAvailable(){
+		return GooglePlayServicesUtil.isGooglePlayServicesAvailable(this.requireContext()) == ConnectionResult.SUCCESS;
 	}
 
 	private void setupView(View view) {

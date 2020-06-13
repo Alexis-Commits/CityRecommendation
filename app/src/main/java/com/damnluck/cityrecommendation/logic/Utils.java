@@ -28,9 +28,9 @@ public class Utils {
 				cityArticle = cityArticle.substring(index + 1);
 				index = cityArticle.indexOf(criterion);
 			}
+
 			result.add(new Pair<String, Integer>(criterion, count));
 		}
-
 
 		return result;
 	}
@@ -42,7 +42,6 @@ public class Utils {
 		for (Pair<String, Integer> word : words) {
 			score = score + word.second;
 		}
-
 
 		return score;
 	}
@@ -57,7 +56,8 @@ public class Utils {
 			return 0;
 		} else {
 			double theta = coords1.getLon() - coords2.getLon();
-			double dist = Math.sin(Math.toRadians(coords1.getLat())) * Math.sin(Math.toRadians(coords2.getLat())) +
+			double dist =
+				Math.sin(Math.toRadians(coords1.getLat())) * Math.sin(Math.toRadians(coords2.getLat())) +
 				Math.cos(Math.toRadians(coords1.getLat())) * Math.cos(Math.toRadians(coords2.getLat())) * Math.cos(Math.toRadians(theta));
 			dist = Math.acos(dist);
 			dist = Math.toDegrees(dist);
@@ -65,14 +65,13 @@ public class Utils {
 
 			return dist;
 		}
-
 	}
 
 
 	public static <T> ArrayList<T> removeDuplicates(ArrayList<T> list)
 	{
 
-		ArrayList<T> newList = new ArrayList<T>();
+		ArrayList<T> newList = new ArrayList<>();
 
 		for (T element : list) {
 
